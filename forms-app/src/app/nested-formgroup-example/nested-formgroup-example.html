@@ -1,0 +1,22 @@
+<h3>Nested formgroup example</h3>
+
+<form [formGroup]="registrationForm">
+    <label for="name">Name: </label>
+    <input type="text" id="name" formControlName="name" />
+
+    <label for="email">Email: </label>
+    <input type="text" id="email" formControlName="email" />
+
+    <div formGroupName="address">
+        <label for="city">City: </label>
+        <input type="text" id="city" formControlName="city" />
+
+        <label for="street">Street: </label>
+        <input type="text" id="street" formControlName="street" />
+    </div>
+
+</form>
+
+<div>Value: {{ registrationForm.value | json }}</div>
+
+<button (click)="onChangeCity()">Change city</button>

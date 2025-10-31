@@ -1,0 +1,27 @@
+<h3>Simple validation example</h3>
+
+<form [formGroup]="form">
+    <div class="form__row">
+        <label for="name">Name: </label>
+        <input formControlName="name" id="name" />
+        @if(name.invalid && (name.touched || name.dirty)){
+            <div>
+                @if(name.errors?.['required']){
+                    <div class="error">This field is required</div>
+                }
+            </div>
+        }
+    </div>
+    <div class="form__row">
+        <label for="lastname">Last name: </label>
+        <input formControlName="lastname" id="lastname" />
+        @if(lastname.invalid && (lastname.touched || lastname.dirty)){
+            @if(lastname.errors?.['required']){
+                <div class="error">This field is required</div>
+            }
+            @if(lastname.errors?.['minlength']){
+                <div class="error">Minimum 2 characters required</div>
+            }
+        }
+    </div>
+</form>

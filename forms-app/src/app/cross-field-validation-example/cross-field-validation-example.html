@@ -1,0 +1,40 @@
+<h3>Cross field validation example</h3>
+
+<form [formGroup]="form">
+  <div>
+    <input formControlName="username" placeholder="User name" />
+    <div class="error">
+        @if(username.invalid && (username.touched || username.dirty)){
+            @if(username.errors?.['required']){
+                <div>This field is required</div>
+            }
+        }
+    </div>
+  </div>
+  <div>
+    <input type="password" formControlName="password" placeholder="password" />
+    <div class="error">
+        @if(password.invalid && (password.touched || password.dirty)){
+            @if(password.errors?.['required']){
+                <div>This field is required</div>
+            }
+            @if(password.errors?.['minlength']){
+                <div>Minimum 8 characters required</div>
+            }
+        }
+    </div>
+  </div>
+  <div>
+    <input type="password" formControlName="passwordRepeat" placeholder="repeat password" />
+  </div>
+  
+  @if(!form.valid){
+    <div class="error">
+        @if(form.errors?.['passwordmismatch']){
+            <div>Passwords don't match</div>
+        }
+    </div>
+  }
+
+<button type="submit" [disabled]="!form.valid">Register</button>
+</form>

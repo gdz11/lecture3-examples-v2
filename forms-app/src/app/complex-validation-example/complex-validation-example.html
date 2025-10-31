@@ -1,0 +1,87 @@
+<h3>Complex validation example</h3>
+
+<div class="form-container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form__row">
+            <input formControlName="name" placeholder="Name" />
+            @if(name.invalid && (name.touched || name.dirty)){
+                <div class="error">
+                    @if(name.errors?.['required']){
+                        <div>This field is required</div>
+                    }
+                    @if(name.errors?.['minlength']){
+                        <div>Minimum 3 characters required</div>
+                    }
+                    @if(name.errors?.['pattern']){
+                        <div>Only letters allowed</div>
+                    }
+                </div>
+            }
+        </div>
+        <div class="form__row">
+            <input formControlName="lastname" placeholder="Last name" />
+            @if(lastname.invalid && (lastname.touched || lastname.dirty)){
+                <div class="error">
+                    @if(lastname.errors?.['required']){
+                        <div>This field is required</div>
+                    }
+                    @if(lastname.errors?.['minlength']){
+                        <div>Minimum 3 characters required</div>
+                    }
+                    @if(lastname.errors?.['pattern']){
+                        <div>Only letters allowed</div>
+                    }
+                </div>
+            }
+        </div>
+        <div class="form__row">
+            <select formControlName="gender">
+                @for(item of genders; track item.id){
+                    <option [ngValue]="item.id">{{item.name}}</option>
+                }
+            </select>
+            @if(gender.invalid && (gender.touched || gender.dirty)){
+                <div class="error">
+                    @if(gender.errors?.['required']){
+                        <div>This field is required</div>
+                    }
+                </div>
+            }
+        </div>
+        <div class="form__row">
+            <input formControlName="phone" placeholder="Phone" />
+            @if(phone.invalid && (phone.touched || phone.dirty)){
+                <div class="error">
+                    @if(phone.errors?.['pattern']){
+                        <div>Should be in format 5xxxxxxxx</div>
+                    }
+                </div>
+            }
+        </div>
+        <div class="form__row">
+            <input formControlName="email" placeholder="Email" />
+            @if(email.invalid && (email.touched || email.dirty)){
+                <div class="error">
+                    @if(email.errors?.['required']){
+                        <div>This field is required</div>
+                    }
+                    @if(email.errors?.['email']){
+                        <div>Invalid format</div>
+                    }
+                </div>
+            }
+        </div>
+        <div class="form__row">
+            <label for="isLegalAge" >Legal age: </label>
+            <input type="checkbox" formControlName="isLegalAge" id="isLegalAge" />
+            @if(isLegalAge.invalid && (isLegalAge.touched || isLegalAge.dirty)){
+                <div class="error">
+                    @if(isLegalAge.errors?.['required']){
+                        <div>You need to be at least 18 years old</div>
+                    }
+                </div>
+            }
+        </div>
+        <button type="submit" [disabled]="!form.valid" >Register</button>
+    </form>
+</div>

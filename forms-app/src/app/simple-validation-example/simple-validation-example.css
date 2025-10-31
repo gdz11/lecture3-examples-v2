@@ -1,0 +1,11 @@
+/* .ng-invalid:not(.ng-pristine) {
+    border-color: red;
+} */
+
+.ng-invalid .ng-touched, .ng-invalid .ng-dirty {
+    border-color: red;
+}
+
+.error {
+    color: red;
+}
